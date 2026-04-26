@@ -20,9 +20,9 @@ namespace XRL.World.Parts.Mutation
         public override void Register(GameObject Object, IEventRegistrar Registrar)
         {
             Registrar.Register("BeginTakeAction");
-            // Registrar.Register("CommandUnphase");
-            // Registrar.Register("CommandPhase");
-            Registrar.Register("CommandTogglePhase");
+            Registrar.Register("AfterPhaseIn");
+            Registrar.Register("AfterPhaseOut");
+			Registrar.Register("CommandTogglePhase");
             base.Register(Object, Registrar);
         }
 
@@ -45,7 +45,6 @@ namespace XRL.World.Parts.Mutation
         public void SyncAbilities()
         {
             UnphaseActivatedAbility.ToggleState = ParentObject.HasEffect<Unphased>();
-            UnphaseActivatedAbility.Visible = true;
         }
 
         public int GetCooldown(int Level){
@@ -57,16 +56,16 @@ namespace XRL.World.Parts.Mutation
         }
 
         public override bool HandleEvent(AIGetOffensiveAbilityListEvent E){
-            bool phased = E.Actor.HasEffect("Phased");
-            if (phased != E.Target.HasEffect("Phased") && (!phased || UnphaseActivatedAbility.Cooldown <= 0) && E.Distance <= 2 && E.Actor.HasLOSTo(E.Target, IncludeSolid: false)){
+            bool phased = E.Actor.HasEffect<Phased>();
+            if (phased != E.Target.HasEffect<Phased>() && (!phased || UnphaseActivatedAbility.Cooldown <= 0) && E.Distance <= 2 && E.Actor.HasLOSTo(E.Target, IncludeSolid: false)){
                 E.Add("CommandTogglePhase");
             }
             return base.HandleEvent(E);
         }
 
         public override bool HandleEvent(AIGetDefensiveAbilityListEvent E){
-            bool phased = E.Actor.HasEffect("Phased");
-            if (phased == E.Target.HasEffect("Phased") && (!phased || UnphaseActivatedAbility.Cooldown <= 0) && E.Actor.hitpoints <= E.Actor.baseHitpoints*2 / 5){
+            bool phased = E.Actor.HasEffect<Phased>();
+            if (phased == E.Target.HasEffect<Phased>() && (!phased || UnphaseActivatedAbility.Cooldown <= 0) && E.Actor.hitpoints <= E.Actor.baseHitpoints*2 / 5){
                 E.Add("CommandTogglePhase");
             }
             return base.HandleEvent(E);
@@ -75,36 +74,36 @@ namespace XRL.World.Parts.Mutation
         public override bool FireEvent(Event E)
         {
             if (E.ID == "BeginTakeAction"){
-                if (!this.ParentObject.HasEffect("Phased") && !this.ParentObject.HasEffect("RealityStabilized") && !this.ParentObject.HasEffect("Unphased"))
+                if (!this.ParentObject.HasEffect<Phased>() && !this.ParentObject.HasEffect<RealityStabilized>() && !this.ParentObject.HasEffect<Unphased>())
                 {
-                    this.ParentObject.ApplyEffect((Effect)new Phased(9999));
-                    SyncAbilities();
+                    this.ParentObject.ApplyEffect(new Phased(9999));
                     UnphaseActivatedAbility.ToggleState = false;
                 }
                 SyncAbilities();
                 return true;
 
-            }
-            else if (E.ID == "CommandTogglePhase")
+			} else if (E.ID == "AfterPhaseOut" || E.ID == "AfterPhaseIn"){
+				SyncAbilities();
+			} else if (E.ID == "CommandTogglePhase")
             {
-                if (ParentObject.HasEffect("Unphased")){
+                if (ParentObject.HasEffect<Unphased>()){
                     // Phase Out
+                    if (!this.ParentObject.FireEvent(Event.New("InitiateRealityDistortionLocal", "Object", ParentObject, "Mutation", this), E)){
+                        return false;
+                    }
                     ParentObject.RemoveEffect<Unphased>();
                     ParentObject.PlayWorldSound("Sounds/Abilities/sfx_ability_mutation_phase");
-                    ParentObject.ApplyEffect(new Phased(9999));
+                    // ParentObject.ApplyEffect(new Phased(9999));
                     SyncAbilities();
                     return true;
                 } else{
                     //Phase In
-                    if (!this.ParentObject.FireEvent(Event.New("InitiateRealityDistortionLocal", "Object", ParentObject, "Mutation", this), E)){
-                        return true;
-                    }
-                    ParentObject.ApplyEffect((Effect)new Unphased(GetDuration(Level)));
+                    ParentObject.ApplyEffect(new Unphased(GetDuration(Level) + 1));
                     CooldownMyActivatedAbility(UnphaseActivatedAbilityID, GetCooldown(Level));
                     SyncAbilities();
                     return true;
                 }
-                // return ParentObject.FireEvent(Event.New(this.ParentObject.HasEffect("Unphased") ? "CommandPhase" : "CommandUnphase"));
+                // return ParentObject.FireEvent(Event.New(this.ParentObject.HasEffect<Unphased>() ? "CommandPhase" : "CommandUnphase"));
             }
             return base.FireEvent(E);
         }

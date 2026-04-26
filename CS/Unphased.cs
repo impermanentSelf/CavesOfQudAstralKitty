@@ -31,19 +31,34 @@ namespace XRL.World.Effects
             return base.SameAs(e);
         }
 
+		public override bool UseStandardDurationCountdown(){
+			return true;
+		}
+
+		public override bool WantEvent(int ID, int cascade){
+			if (!base.WantEvent(ID, cascade) && ID != SingletonEvent<BeginTakeActionEvent>.ID && (ID != EffectAppliedEvent.ID)){
+				return ID == WasDerivedFromEvent.ID;
+			}
+			return true;
+		}
+
         public override string GetDetails()
         {
             return "Temporarily able to interact with creatures and objects unless they're phased.\nCan no longer pass through solids.";
         }
 
-        public override bool Apply(GameObject Object)
-        {
-            return Object.RemoveEffect<Phased>();
-        }
+		public override bool HandleEvent(EffectAppliedEvent E){
+			Object.RemoveEffect<Phased>();
+			return base.HandleEvent(E);
+		}
+
+		public override bool Apply(GameObject Object){
+			return Object.RemoveEffect<Phased>();
+		}
 
         public override void Remove(GameObject Object)
         {
-            // Object.ApplyEffect((Effect)new Phased(9999));
+            Object.ApplyEffect(new Phased(9999));
             base.Remove(Object);
         }
 
@@ -51,7 +66,7 @@ namespace XRL.World.Effects
         {
             this.Tile = Object.Render.Tile;
             this.RenderString = Object.Render.RenderString;
-            Registrar.Register("BeginTakeAction");
+            // Registrar.Register("BeginTakeAction");
             base.Register(Object, Registrar);
         }
 
@@ -60,17 +75,15 @@ namespace XRL.World.Effects
             return true;
         }
 
-        public override bool FireEvent(Event E)
-        {
-            if (E.ID == "BeginTakeAction" && this.Duration > 0)
-            {
-                if (this.Duration != 9999)
-                    --this.Duration;
-                    if (this.Duration > 0 && this.Object.IsPlayer())
+		public override bool HandleEvent(BeginTakeActionEvent E){
+			if (this.Duration > 0){
+                if (this.Duration != 9999){
+                    if (this.Duration > 0 && this.Object.IsPlayer()){
                         Effect.AddPlayerMessage("You will phase back out in " + Duration.Things("round") + ".");
-                    // Effect.AddPlayerMessage("You will phase back out in " + Grammar.Cardinal(this.Duration - 1) + " " + (this.Duration - 1 != 1 ? "turns" : "turn") + ".");
+					}
+				}
             }
-            return base.FireEvent(E);
-        }
+			return base.HandleEvent(E);
+		}
     }
 }
