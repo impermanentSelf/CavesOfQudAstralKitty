@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<genotypes>
+  <genotype Name="KittyAstral" MutationPoints="0" StatPoints="30" AllowedMutationCategories="*" RandomWeight="20" DisplayName="Astral Kitty" Subtypes="KittyAstral" Class="" Tile="creatures/sw_kitty.bmp" DetailColor="M" BodyObject="KittyAstral" BaseHPGain="2-3" BaseSPGain="30" BaseMPGain="1" Species="cat" IsMutant="true" CharacterBuilderModules="XRL.CharacterBuilds.Qud.QudCasteModule,XRL.CharacterBuilds.Qud.QudCyberneticsModule">
+    <stat Name="Strength" Minimum="8" Maximum="24" ChargenDescription="Your {{W|Strength}} score determines how effectively you penetrate your opponents' armor with melee attacks, how much damage your melee attacks do, your ability to resist forced movement, and your carry capacity."/>
+    <stat Name="Agility" Minimum="12" Maximum="24" ChargenDescription="Your {{W|Agility}} score determines your accuracy with both melee and ranged weapons and your ability to dodge attacks."/>
+    <stat Name="Toughness" Minimum="8" Maximum="24" ChargenDescription="Your {{W|Toughness}} score determines your number of hit points, your natural healing rate, and your ability to resist poison and disease."/>
+    <stat Name="Intelligence" Minimum="7" Maximum="24" ChargenDescription="Your {{W|Intelligence}} score determines your number of skill points and your ability to examine artifacts."/>
+    <stat Name="Willpower" Minimum="7" Maximum="24" ChargenDescription="Your {{W|Willpower}} score modifies the cooldowns of your activated abilities, determines your ability to resist mental attacks, and modifies your natural healing rate."/>
+    <stat Name="Ego" Minimum="7" Maximum="24" ChargenDescription="Your {{W|Ego}} score determines the potency of your mental mutations, your ability to haggle with merchants, and your ability to dominate the wills of other living creatures."/>    
+    <skills>
+      <skill Name="Tactics_Run" />
+      <skill Name="Survival_Camp" />
+    </skills>
+	<reputations>
+      <reputation With="Cats" Value="400" /> <!--start at 100-->
+      <reputation With="Dogs" Value="-300" /> <!--start at 0-->
+
+    </reputations>
+    <extrainfo>A cute baby astral tabby</extrainfo>
+    <extrainfo>+400 reputation with Cats</extrainfo>
+    <extrainfo>-300 reputation with Dogs</extrainfo>
+    <extrainfo>Starts with no mutations</extrainfo>
+    <extrainfo>Has astral claws and a bite</extrainfo>
+  </genotype>
+</genotypes>

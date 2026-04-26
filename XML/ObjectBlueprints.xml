@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objects>
+  <object Name="Kitty_Astral_Claw" Inherits="NaturalWeapon">
+    <part Name="Render" DisplayName="claw" Tile="Creatures/natural-weapon-paw.bmp" ColorString="&amp;K" />
+    <part Name="MeleeWeapon" BaseDamage="2d2" PenBonus="2" MaxStrengthBonus="1000" Skill="Axe" Stat="Strength" Slot="Foot" />
+    <part Name="ModSerrated" Chance="3" />
+    <part Name="Physics" IsReal="false" Solid="false" Takeable="false" Weight="0" Category="Natural Weapon" />
+    <tag Name="BaseObject" Value="*noinherit" />
+    <tag Name="UndesireableWeapon" />
+    <tag Name="NaturalGear" />
+    <tag Name="WeaponUnarmed" />
+    <tag Name="NeverStack" />
+    <tag Name="DefaultEquipmentCanBeRegenerated" />
+  </object>
+  <object Name="Kitty_Astral_Bite" Inherits="Bite">
+    <part Name="MeleeWeapon" PenBonus="2" MaxStrengthBonus="1000" BaseDamage="2d2" Skill="Axe" Stat="Strength" Slot="Face" />
+    <part Name="ModSerrated" Chance="3" />
+    <part Name="Physics" IsReal="false" Solid="false" Takeable="false" Weight="0" Category="Natural Weapon" />
+    <tag Name="BaseObject" Value="*noinherit" />
+    <tag Name="UndesireableWeapon" />
+    <tag Name="NaturalGear" />
+    <tag Name="WeaponUnarmed" />
+    <tag Name="NeverStack" />
+    <tag Name="DefaultEquipmentCanBeRegenerated" />
+  </object>
+  <object Name="KittyAstral" Inherits="BaseCat">
+    <part Name="Body" Anatomy="AnatomyAstralKitty" />
+    <mutation Name="Unphasing" Level="1" />
+    <mutation Name="AstralClaws" Level="1" />
+    <tag Name="ExcludeFromDynamicEncounters" Value="*noinherit" />
+    <part Name="Render" DisplayName="astral kitty" Tile="creatures/sw_kitty.bmp" RenderString="c" ColorString="&amp;y" DetailColor="K" />
+    <part Name="Description" Short="=pronouns.Subjective= =verb:flicker:afterpronoun= behind =pronouns.possessive= marble coat, curiously checking every facet of this dimension while pouncing around =pronouns.possessive= own chimeric world.  =pronouns.Subjective= =verb:move:afterpronoun= towards your legs as if to stretch against you and purrs as =pronouns.subjective= instead =verb:phase:afterpronoun= through your ankles." />
+    <tag Name="HeroNameTitleWiseDescriptor" Value="Sleek,Sphinx,Sphinx-like,Cunning,Graceful,Lithe,Wise,Sage,Sophic" />
+    <tag Name="HeroNameTitleMayorSyn" Value="sphinx,mayor,elder" />
+    <tag Name="HeroNameTitleMayorSynCap" Value="Sphinx,Mayor,Elder" />
+    <part Name="Brain" Hostile="false" Factions="Cats-100" />
+    <tag Name="RandomGender" Value="any" />
+    <part Name="Swarmer" />
+    <part Name="Pettable" />
+    <tag Name="PetResponse" Value="=pronouns.Subjective= =verb:purr:afterpronoun= vibrantly" />
+    <tag Name="BaseObject" Value="*noinherit" />
+    <part Name="SmartuseForceTwiddles" />
+    <xtagTextFragments YounglingNoise="*mew*,*prrrup*" Activity="sleeping and chasing birds all through the day" VillageActivity="sleeping in our homes" SacredThing="judgemental silence" />
+  </object>
+
+  <object Name="Barnabus" Inherits="KittyAstral">
+    <xtagGrammar Proper="true" />
+    <part Name="Render" DisplayName="&amp;YBarnabus" Tile="creatures/sw_kitty.bmp" RenderString="c" ColorString="&amp;Y" DetailColor="K" />
+    <mutation Name="Unphasing" Level="2" />
+    <mutation Name="AstralClaws" Level="3" />
+    <stat Name="Level" Value="4" />
+    <stat Name="Strength" sValue="19" />
+    <stat Name="Agility" sValue="21" />
+    <stat Name="Toughness" sValue="17" />
+    <stat Name="Intelligence" sValue="9" />
+    <stat Name="Willpower" sValue="9" />
+    <stat Name="Ego" sValue="9" />
+    <tag Name="Pet"/>
+    <tag Name="StartingPet"/>
+    <tag Name="PetResponse" Value="unphases and gently purrs against your ankles." />
+    <tag Name="ExcludeFromDynamicEncounters" Value="*noinherit" />
+    <part Name="Pettable" />
+  </object>
+
+</objects>

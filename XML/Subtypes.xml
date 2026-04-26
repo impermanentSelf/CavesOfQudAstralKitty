@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<subtypes>
+  <class ID="KittyAstral" ChargenTitle="Become as cat..." SingularTitle="astral kitty" StatBoxDisplay="true">
+    <category Name="Astral Kitty" DisplayName="Become as cat..." >
+      <subtype Name="Astral Kitty" Gear="AstralKitty_StartingGear" Tile="creatures/sw_kitty.bmp" DetailColor="M">
+      <stat Name="Agility" Bonus="3" />
+        <skills>
+          <skill Name="Acrobatics" />
+          <skill Name="Acrobatics_SwiftReflexes" />
+          <skill Name="Acrobatics_Dodge" />
+          <skill Name="Acrobatics_Jump" />
+          <skill Name="Tactics" />
+          <skill Name="Tactics_Hurdle" />
+          <skill Name="Tinkering_Scavenger" />
+          <skill Name="Customs_TrashDivining" />
+        </skills>
+       <extrainfo>You're a kitty!</extrainfo>
+      </subtype>
+      </category>
+    </class>
+</subtypes>

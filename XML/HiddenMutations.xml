@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mutations Hidden="true" ExcludeFromPool="true">
+  <category Name="Physical">
+      <mutation Name="Astral Walker" DisplayName="Astral Walker" Class="Unphasing" Exclusions="Phasing" BearerDescription="astral beings" Tile="Mutations/phasing.bmp"/>
+      <mutation Name="Astral Claws" DisplayName="Astral Claws" Class="AstralClaws" BearerDescription="astral beings" Tile="Creatures/natural-weapon-paw.bmp"/>
+ </category>
+</mutations>
