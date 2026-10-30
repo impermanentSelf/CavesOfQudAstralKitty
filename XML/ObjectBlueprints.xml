@@ -57,7 +57,7 @@
     <stat Name="Ego" sValue="9" />
     <tag Name="Pet"/>
     <tag Name="StartingPet"/>
-    <tag Name="PetResponse" Value="unphases and gently purrs against your ankles." />
+    <tag Name="PetResponse" Value="=verb:unphase= and gently =verb:purr= against =object.t= ankles." />
     <tag Name="ExcludeFromDynamicEncounters" Value="*noinherit" />
     <part Name="Pettable" />
   </object>

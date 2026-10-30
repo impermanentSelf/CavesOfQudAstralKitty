@@ -1,8 +1,8 @@
 {
   "WorkshopId": 3713575829,
   "Title": "Astral Kitty [Fork]",
-  "Description": "this is an updated fork of the Astral Kitty mod by kobold (found at https://steamcommunity.com/sharedfiles/filedetails/?id=1761293513)",
+  "Description": "this is an updated fork of the Astral Kitty mod by kobold (found at https://steamcommunity.com/sharedfiles/filedetails/?id=1761293513)\n\nplay as the astral tabby-inspired Astral Kitty\n\nastral kitties have the Astral Walker mutation that makes them phased by default but then allows them to briefly unphase (basically the inverse of the phasing mutation). they also have sharp serrated claws that can dismember enemies and get stronger through the Astral Claws mutation\n",
   "Tags": "Genotype,Pet",
-  "Visibility": "0",
+  "Visibility": "2",
   "ImagePath": "preview.png"
 }
